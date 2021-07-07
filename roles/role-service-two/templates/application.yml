@@ -1,0 +1,70 @@
+# GLOBAL CONFIGURATION
+
+spring:
+  application.name: service-two
+  datasource:
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jackson.serializationindent_output: true
+
+info:
+  component: Service-Two
+  artifact: service-two
+  version: v1.2
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+management:
+  contextPath: /actuator
+
+server:
+  contextPath: /
+  port: 8084
+
+---
+spring:
+  profiles: default
+  autoconfigure.exclude:
+    - org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration
+  cloud:
+    consul:
+      host: 172.31.11.50
+      port: 8500
+      discovery:
+        hostName: 172.31.0.44
+        instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+        healthCheckPath: ${management.contextPath}/health
+        healthCheckInterval: 15s
+    loadbalancer.ribbon.enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.31.9.73/service_two_db?createDatabaseIfNotExist=true
+    username: epam
+    password: anypass
+  jpa:
+    hibernate:
+      ddl-auto: create
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+  rabbitmq:
+    host: 172.31.11.134
+    port: 5672
+    username: epam
+    password: anypass
+    virtualHost: /
+
+logging:
+  file: service-two-application.log
+  pattern:
+    file: "%d %-5level [%thread] %logger{0}: %msg%n"
+  level:
+    org.springframework.web: WARN
+    com.mudigal.two: DEBUG
+    org.hibernate: WARN
