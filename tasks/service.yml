@@ -7,7 +7,7 @@
     
 - name: 'Copy modifyed config' 
   copy:
-    src: '/home/arsen/project-ansible-2/roles/role-service-two/templates/application.yml'
+    src: '/home/arsen/EPAM-team-8/ansible-role-service-two/templates/application.yml'
     dest: '/opt/service-two-epam/src/main/resources/'
 
 - name: 'Maven clean package'
@@ -15,7 +15,7 @@
 
 - name: 'Copy service'
   copy:
-    src: '/home/arsen/project-ansible-2/roles/role-service-two/templates/service2.service'
+    src: '/home/arsen/EPAM-team-8/ansible-role-service-two/templates/service2.service'
     dest: '/lib/systemd/system'
     owner: root
     group: root
