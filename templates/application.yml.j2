@@ -10,7 +10,7 @@ spring:
 info:
   component: Service-Two
   artifact: service-two
-  version: v1.2
+  version: stable
 
 endpoints:
   restart:
@@ -34,19 +34,19 @@ spring:
     - org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration
   cloud:
     consul:
-      host: 172.31.11.50
+      host: {{ consul_host }}
       port: 8500
       discovery:
-        hostName: 172.31.0.44
+        hostName: {{ service_host }}
         instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
         healthCheckPath: ${management.contextPath}/health
         healthCheckInterval: 15s
     loadbalancer.ribbon.enabled: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.31.9.73/service_two_db?createDatabaseIfNotExist=true
-    username: epam
-    password: anypass
+    url: jdbc:mysql://{{ mysql_host }}/{{ db_name }}?createDatabaseIfNotExist=true
+    username: {{ db_user }}
+    password: {{ db_pass }}
   jpa:
     hibernate:
       ddl-auto: create
@@ -54,10 +54,10 @@ spring:
     properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
   rabbitmq:
-    host: 172.31.11.134
+    host: {{ rabbitmq_host }}
     port: 5672
-    username: epam
-    password: anypass
+    username: {{ rabbitmq_user }}
+    password: {{ rabbitmq_pass }}
     virtualHost: /
 
 logging:
