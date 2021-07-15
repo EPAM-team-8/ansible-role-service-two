@@ -2,11 +2,11 @@
 
 java_path: /usr/bin/java
 jar_path: /opt/service-two-epam/target/service-two.jar
-consul_host: 172.31.11.50
-service_host: 127.0.0.1
-mysql_host: 172.31.20.15
+consul_host: consul.rabbit-mq.xyz
+service_host: service.rabbit-mq.xyz
+mysql_host: db.rabbit-mq.xyz
 db_name: service_two_db
-rabbitmq_host: 172.31.11.134
+rabbitmq_host: rabbit.rabbit-mq.xyz
 db_user: epam
 db_pass: !vault |
          $ANSIBLE_VAULT;1.1;AES256
