@@ -6,7 +6,7 @@ consul_host: consul.rabbit-mq.xyz
 service_host: service.rabbit-mq.xyz
 mysql_host: db.rabbit-mq.xyz
 db_name: service_two_db
-rabbitmq_host: rabbit.rabbit-mq.xyz
+rabbitmq_host: rab.rabbit-mq.xyz
 db_user: epam
 db_pass: !vault |
          $ANSIBLE_VAULT;1.1;AES256
